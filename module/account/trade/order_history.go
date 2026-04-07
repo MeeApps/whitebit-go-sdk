@@ -1,7 +1,7 @@
 package trade
 
 import (
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 	"github.com/whitebit-exchange/go-sdk/module/account"
 )
 
@@ -9,7 +9,7 @@ const OrderHistoryEndpointUrl = "/api/v4/trade-account/order/history"
 
 type OrderHistory struct {
 	Id            int64   `json:"id"`
-	ClientOrderId string  `json:"clientOrderId"`
+	ClientOrderId string  `json:"client_order_id"`
 	StartTime     float64 `json:"ctime"`
 	EndTime       float64 `json:"ftime"`
 	Side          string  `json:"side"`
@@ -18,9 +18,10 @@ type OrderHistory struct {
 	Type          string  `json:"type"`
 	TakerFee      string  `json:"takerFee"`
 	MakerFee      string  `json:"makerFee"`
-	DealFee       string  `json:"dealFee"`
-	DealStock     string  `json:"dealStock"`
-	DealMoney     string  `json:"dealMoney"`
+	DealFee       string  `json:"deal_fee"`
+	DealStock     string  `json:"deal_stock"`
+	DealMoney     string  `json:"deal_money"`
+	Status        string  `json:"status"`
 }
 
 type historyEndpoint struct {

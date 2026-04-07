@@ -11,7 +11,7 @@ import (
 type Whitebit struct {
 	apiKey     string
 	apiSecret  string
-	baseURL    string
+	BaseURL    string
 	httpClient *http.Client
 }
 
@@ -23,7 +23,7 @@ func NewClient(apiKey string, apiSecret string) *Whitebit {
 	return &Whitebit{
 		apiKey:     apiKey,
 		apiSecret:  apiSecret,
-		baseURL:    "https://whitebit.com",
+		BaseURL:    "https://whitebit.com",
 		httpClient: &http.Client{Timeout: 15 * time.Second},
 	}
 }
@@ -40,7 +40,7 @@ func NewClientWithHTTPClient(apiKey, apiSecret string, httpClient *http.Client, 
 	return &Whitebit{
 		apiKey:     apiKey,
 		apiSecret:  apiSecret,
-		baseURL:    baseURL,
+		BaseURL:    baseURL,
 		httpClient: httpClient,
 	}
 }
@@ -64,7 +64,7 @@ func (c *Whitebit) call(request *http.Request) ([]byte, int, error) {
 }
 
 func (c *Whitebit) SendRequest(endpoint Endpoint) ([]byte, error) {
-	url := c.baseURL + endpoint.Url()
+	url := c.BaseURL + endpoint.Url()
 
 	var req *http.Request
 	var err error

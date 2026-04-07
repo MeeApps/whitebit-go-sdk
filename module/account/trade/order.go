@@ -1,7 +1,7 @@
 package trade
 
 import (
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 	"github.com/whitebit-exchange/go-sdk/module/account"
 )
 
@@ -10,6 +10,7 @@ const orderEndpointUrl = "/api/v4/trade-account/order"
 type Order struct {
 	Time          float64 `json:"time"`
 	Fee           string  `json:"fee"`
+	FeeAsset      string  `json:"feeAsset"`
 	Price         string  `json:"price"`
 	Amount        string  `json:"amount"`
 	Id            int64   `json:"id"`

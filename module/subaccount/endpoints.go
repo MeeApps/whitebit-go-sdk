@@ -1,6 +1,6 @@
 package subaccount
 
-import "github.com/whitebit-exchange/go-sdk"
+import whitebit "github.com/whitebit-exchange/go-sdk"
 
 const (
 	createURL          = "/api/v4/sub-account/create"

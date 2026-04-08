@@ -2,7 +2,7 @@ package main_account
 
 import (
 	"github.com/stretchr/testify/mock"
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 )
 
 func (s *MainAccountTestSuite) TestCustomFee() {
@@ -10,7 +10,7 @@ func (s *MainAccountTestSuite) TestCustomFee() {
 		Error:     nil,
 		Taker:     "0.001",
 		Maker:     "0.002",
-		CustomFee: map[string][]string{"BTC_USDT": {"0.001", "0.001"}},
+		CustomFee: map[string]map[string]string{"BTC_USDT": {"0.001": "0.001"}},
 	}
 
 	endpoint := newCustomFeeEndpoint()

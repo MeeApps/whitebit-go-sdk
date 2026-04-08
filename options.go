@@ -1,6 +1,7 @@
 package whitebit
 
 import (
+	"sync"
 	"time"
 )
 
@@ -25,8 +26,21 @@ type AuthParams struct {
 	NonceWindow bool   `json:"nonceWindow"`
 }
 
+var lastNonce int64
+var nonceMutex sync.Mutex
+var TimeOffset int64
+
 func NewAuthParams(url string) AuthParams {
-	return AuthParams{Nonce: time.Now().UnixMilli(), NonceWindow: true, Request: url}
+	nonceMutex.Lock()
+	defer nonceMutex.Unlock()
+
+	nonce := time.Now().UnixMilli() - TimeOffset
+	if nonce <= lastNonce {
+		nonce = lastNonce + 1
+	}
+	lastNonce = nonce
+
+	return AuthParams{Nonce: nonce, NonceWindow: true, Request: url}
 }
 
 func (params AuthParams) IsAuthed() bool {

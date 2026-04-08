@@ -3,7 +3,7 @@ package subaccount
 import (
 	"encoding/json"
 
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 )
 
 type SubAccount struct {

@@ -64,7 +64,7 @@ func (c *Whitebit) call(request *http.Request) ([]byte, int, error) {
 }
 
 func (c *Whitebit) SendRequest(endpoint Endpoint) ([]byte, error) {
-	url := c.baseURL + endpoint.Url()
+	url := c.BaseURL + endpoint.Url()
 
 	var req *http.Request
 	var err error

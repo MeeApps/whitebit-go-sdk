@@ -1,8 +1,6 @@
 package spot
 
-import (
-	"github.com/whitebit-exchange/go-sdk"
-)
+import whitebit "github.com/whitebit-exchange/go-sdk"
 
 const stopLimitEndpointUrl = "/api/v4/order/stop_limit"
 
@@ -12,12 +10,13 @@ type StopLimitOrder struct {
 }
 
 type StopLimitOrderParams struct {
-	Market          string `json:"market"`
-	Amount          string `json:"amount"`
-	Side            string `json:"side"`
-	Price           string `json:"price"`
-	ActivationPrice string `json:"activation_price"`
-	ClientOrderId   string `json:"clientOrderId,omitempty"`
+	Market                  string `json:"market"`
+	Amount                  string `json:"amount"`
+	Side                    string `json:"side"`
+	Price                   string `json:"price"`
+	ActivationPrice         string `json:"activation_price"`
+	ClientOrderId           string `json:"clientOrderId,omitempty"`
+	SelfTradePreventionMode string `json:"stp,omitempty"` // no, cancel_both, cancel_new, cancel_old. Default: no
 }
 
 type stopLimitEndpoint struct {

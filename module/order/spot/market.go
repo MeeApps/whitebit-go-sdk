@@ -1,8 +1,6 @@
 package spot
 
-import (
-	"github.com/whitebit-exchange/go-sdk"
-)
+import whitebit "github.com/whitebit-exchange/go-sdk"
 
 const marketOrderEndpointUrl = "/api/v4/order/market"
 
@@ -25,10 +23,11 @@ type MarketOrder struct {
 }
 
 type MarketOrderParams struct {
-	Market        string `json:"market"`
-	Amount        string `json:"amount"`
-	Side          string `json:"side"`
-	ClientOrderId string `json:"clientOrderId,omitempty"`
+	Market                  string `json:"market"`
+	Amount                  string `json:"amount"`
+	Side                    string `json:"side"`
+	ClientOrderId           string `json:"clientOrderId,omitempty"`
+	SelfTradePreventionMode string `json:"stp,omitempty"` // no, cancel_both, cancel_new, cancel_old. Default: no
 }
 
 type marketEndpoint struct {

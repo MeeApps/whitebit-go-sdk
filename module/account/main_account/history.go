@@ -1,7 +1,7 @@
 package main_account
 
 import (
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 )
 
 const historyEndpointUrl = "/api/v4/main-account/history"
@@ -18,6 +18,7 @@ type Details struct {
 type HistoryRecords struct {
 	Address         string      `json:"address"`
 	UniqueId        string      `json:"uniqueId"`
+	TransactionId   string      `json:"transactionId"`
 	CreatedAt       int         `json:"createdAt"`
 	Currency        string      `json:"currency"`
 	Ticker          string      `json:"ticker"`

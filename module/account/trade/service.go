@@ -2,7 +2,8 @@ package trade
 
 import (
 	"encoding/json"
-	"github.com/whitebit-exchange/go-sdk"
+
+	whitebit "github.com/whitebit-exchange/go-sdk"
 	order "github.com/whitebit-exchange/go-sdk/module/order/spot"
 )
 
@@ -51,7 +52,6 @@ func (service *Service) GetHistory(options HistoryOptions) (map[string][]OrderHi
 func (service *Service) GetExecutedHistory(options ExecutedHistoryOptions) ([]ExecutedHistory, error) {
 	endpoint := newExecutedHistoryEndpoint(options.Market, options.Limit, options.Offset, options.ClientOrderId)
 	result, err := service.client.SendRequest(endpoint)
-
 	if err != nil {
 		return nil, err
 	}

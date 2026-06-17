@@ -1,7 +1,7 @@
 package trade
 
 import (
-	"github.com/whitebit-exchange/go-sdk"
+	whitebit "github.com/whitebit-exchange/go-sdk"
 	"github.com/whitebit-exchange/go-sdk/module/account"
 )
 
@@ -17,6 +17,7 @@ type ExecutedHistory struct {
 	Price         string  `json:"price"`
 	Deal          string  `json:"deal"`
 	Fee           string  `json:"fee"`
+	FeeAsset      string  `json:"feeAsset"`
 	OrderId       int64   `json:"orderId"`
 }
 

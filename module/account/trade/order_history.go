@@ -9,7 +9,7 @@ const OrderHistoryEndpointUrl = "/api/v4/trade-account/order/history"
 
 type OrderHistory struct {
 	Id            int64   `json:"id"`
-	ClientOrderId string  `json:"client_order_id"`
+	ClientOrderId string  `json:"clientOrderId"`
 	StartTime     float64 `json:"ctime"`
 	EndTime       float64 `json:"ftime"`
 	Side          string  `json:"side"`
@@ -18,9 +18,9 @@ type OrderHistory struct {
 	Type          string  `json:"type"`
 	TakerFee      string  `json:"takerFee"`
 	MakerFee      string  `json:"makerFee"`
-	DealFee       string  `json:"deal_fee"`
-	DealStock     string  `json:"deal_stock"`
-	DealMoney     string  `json:"deal_money"`
+	DealFee       string  `json:"dealFee"`
+	DealStock     string  `json:"dealStock"`
+	DealMoney     string  `json:"dealMoney"`
 	Status        string  `json:"status"`
 }
 

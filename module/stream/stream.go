@@ -127,15 +127,7 @@ func (stream *Stream) listen(ctx context.Context) {
 				message, err := stream.readMessage()
 				if err != nil {
 					stream.errorHandler(err)
-					time.Sleep(time.Second)
-
-					reconnectErr := stream.reconnect(ctx)
-					if reconnectErr != nil {
-						stream.errorHandler(reconnectErr)
-						return
-					}
-
-					continue
+					return
 				}
 
 				if len(message) == 0 {
@@ -373,50 +365,6 @@ func (stream *Stream) connect(ctx context.Context) error {
 	stream.isConnected = true
 	stream.m.Unlock()
 
-	return nil
-}
-
-func (stream *Stream) reconnect(ctx context.Context) error {
-	stream.Close()
-
-	connectionErr := stream.connect(ctx)
-	if connectionErr != nil {
-		return connectionErr
-	}
-
-	authErr := stream.authorize()
-	if authErr != nil {
-		return authErr
-	}
-
-	stream.m.Lock()
-	// Notify pending query callbacks that connection was lost
-	pendingHandlers := make([]CommandHandler, 0, len(stream.commandHandlers))
-	for id, handler := range stream.commandHandlers {
-		pendingHandlers = append(pendingHandlers, handler)
-		delete(stream.commandHandlers, id)
-	}
-	subscribes := make([]*Subscription, 0, len(stream.subscribes))
-	for _, subscribe := range stream.subscribes {
-		subscribes = append(subscribes, subscribe)
-	}
-	stream.m.Unlock()
-
-	// Notify all pending query callbacks with error response (outside mutex to avoid deadlock)
-	for _, handler := range pendingHandlers {
-		if handler.Handler != nil {
-			// Create error response
-			errorResponse := []byte(`{"error":"connection lost during query"}`)
-			go handler.Handler(handler.Command, errorResponse)
-		}
-	}
-
-	for _, subscribe := range subscribes {
-		subscribeError := subscribe.send(stream)
-		if subscribeError != nil {
-			return subscribeError
-		}
-	}
 	return nil
 }
 

@@ -816,8 +816,9 @@ type Pair [2]string
 
 // AsksAndBids contains asks and bids from the order book.
 type AsksAndBids struct {
-	Asks []Pair `json:"asks"`
-	Bids []Pair `json:"bids"`
+	Asks      []Pair  `json:"asks"`
+	Bids      []Pair  `json:"bids"`
+	Timestamp float64 `json:"timestamp"` // unix seconds from the matching engine
 }
 
 // MarketDepth represents a market depth response.
